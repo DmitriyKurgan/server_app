@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "server_app",
+  "name": "server-app-hw",
   "builds": [
     { "src": "src/index.ts", "use": "@vercel/node" }
   ],
