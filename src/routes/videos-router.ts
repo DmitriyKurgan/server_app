@@ -44,16 +44,10 @@ const videos = [
 
 //all videos request
 videosRouter.get('/', (req: Request, res: Response) => {
-    if (req.query.title) {
-        let searchString = req.query.title.toString()
-        res.send(videos.filter(p => p.title.indexOf(searchString) > -1))
-    } else {
         res.send(videos)
-    }
 })
 
 videosRouter.get('/:id', (req: Request, res: Response) => {
-    debugger
     const id = req.params.id;
     if (id) {
         let searchString = id.toString()
