@@ -18,7 +18,7 @@ app.get('/', (req:Request, res:Response)=>{
 app.delete('/hometask_01/api/testing/all-data', (req:Request, res:Response)=>{
     console.log(req)
     res.send([])
-    //res.sendStatus(204)
+    res.sendStatus(204)
 })
 
 
