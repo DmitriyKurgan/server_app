@@ -53,8 +53,14 @@ videosRouter.get('/', (req: Request, res: Response) => {
 })
 
 videosRouter.get('/:id', (req: Request, res: Response) => {
+    debugger
     const id = req.params.id;
-    console.log('id',id)
+    if (id) {
+        let searchString = id.toString()
+        res.send(videos.filter(p => p.id.toString() === id))
+    } else {
+        res.send(videos)
+    }
 })
 
 
@@ -69,3 +75,10 @@ videosRouter.delete('/:id', (req:Request, res:Response)=>{
     }
     res.sendStatus(404)
 })
+
+videosRouter.delete('/testing/all-data', (req:Request, res:Response)=>{
+    console.log(req)
+    res.send('SUCCESS')
+    //res.sendStatus(204)
+})
+

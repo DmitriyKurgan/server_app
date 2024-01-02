@@ -6,10 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const videos_router_1 = require("./routes/videos-router");
 const app = (0, express_1.default)();
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 5000;
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use('hometask_01/api//videos', videos_router_1.videosRouter);
+app.use('/hometask_01/api/videos', videos_router_1.videosRouter);
 app.get('/', (req, res) => {
     res.send('DEFAULT GET REQUEST');
 });

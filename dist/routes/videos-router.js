@@ -52,8 +52,15 @@ exports.videosRouter.get('/', (req, res) => {
     }
 });
 exports.videosRouter.get('/:id', (req, res) => {
+    debugger;
     const id = req.params.id;
-    console.log('id', id);
+    if (id) {
+        let searchString = id.toString();
+        res.send(videos.filter(p => p.id.toString() === id));
+    }
+    else {
+        res.send(videos);
+    }
 });
 exports.videosRouter.delete('/:id', (req, res) => {
     const id = +req.params.id;
@@ -65,4 +72,9 @@ exports.videosRouter.delete('/:id', (req, res) => {
         return false;
     }
     res.sendStatus(404);
+});
+exports.videosRouter.delete('/testing/all-data', (req, res) => {
+    console.log(req);
+    res.send('SUCCESS');
+    //res.sendStatus(204)
 });
