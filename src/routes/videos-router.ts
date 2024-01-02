@@ -69,10 +69,3 @@ videosRouter.delete('/:id', (req:Request, res:Response)=>{
     }
     res.sendStatus(404)
 })
-
-videosRouter.delete('/testing/all-data', (req:Request, res:Response)=>{
-    console.log(req)
-    res.send('SUCCESS')
-    //res.sendStatus(204)
-})
-

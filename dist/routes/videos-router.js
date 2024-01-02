@@ -43,16 +43,9 @@ const videos = [
 ];
 //all videos request
 exports.videosRouter.get('/', (req, res) => {
-    if (req.query.title) {
-        let searchString = req.query.title.toString();
-        res.send(videos.filter(p => p.title.indexOf(searchString) > -1));
-    }
-    else {
-        res.send(videos);
-    }
+    res.send(videos);
 });
 exports.videosRouter.get('/:id', (req, res) => {
-    debugger;
     const id = req.params.id;
     if (id) {
         let searchString = id.toString();
@@ -72,9 +65,4 @@ exports.videosRouter.delete('/:id', (req, res) => {
         return false;
     }
     res.sendStatus(404);
-});
-exports.videosRouter.delete('/testing/all-data', (req, res) => {
-    console.log(req);
-    res.send('SUCCESS');
-    //res.sendStatus(204)
 });
