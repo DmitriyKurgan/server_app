@@ -15,8 +15,7 @@ app.get('/', (req, res) => {
 });
 app.delete('/hometask_01/api/testing/all-data', (req, res) => {
     console.log(req);
-    res.send([]);
-    res.sendStatus(204);
+    res.status(204).send();
 });
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

@@ -15,11 +15,10 @@ app.get('/', (req:Request, res:Response)=>{
     res.send('DEFAULT GET REQUEST')
 });
 
-app.delete('/hometask_01/api/testing/all-data', (req:Request, res:Response)=>{
-    console.log(req)
-    res.send([])
-    res.sendStatus(204)
-})
+app.delete('/hometask_01/api/testing/all-data', (req: Request, res: Response) => {
+    console.log(req);
+    res.status(204).send();
+});
 
 
 
