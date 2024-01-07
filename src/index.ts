@@ -9,13 +9,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use('/hometask_01/api/videos', videosRouter);
+app.use('/videos', videosRouter);
 
 app.get('/', (req:Request, res:Response)=>{
     res.send('DEFAULT GET REQUEST')
 });
 
-app.delete('/hometask_01/api/testing/all-data', (req: Request, res: Response) => {
+app.delete('/testing/all-data', (req: Request, res: Response) => {
     console.log(req);
     res.status(204).send();
 });

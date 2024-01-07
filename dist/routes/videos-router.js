@@ -43,16 +43,15 @@ const videos = [
 ];
 //all videos request
 exports.videosRouter.get('/', (req, res) => {
-    res.send(videos);
+    res.send(videos).status(200);
 });
 exports.videosRouter.get('/:id', (req, res) => {
     const id = req.params.id;
     if (id) {
-        let searchString = id.toString();
-        res.send(videos.filter(p => p.id.toString() === id));
+        res.send(videos.filter(p => p.id.toString() === id)).status(200);
     }
     else {
-        res.send(videos);
+        res.send(videos).status(200);
     }
 });
 exports.videosRouter.delete('/:id', (req, res) => {
