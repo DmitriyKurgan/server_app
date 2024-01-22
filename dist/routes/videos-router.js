@@ -75,15 +75,42 @@ exports.videosRouter.delete('/:id', (req, res) => {
     res.sendStatus(404);
 });
 exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
+    // const newVideo: VideoType = {
+    //     id: +(new Date()),
+    //     title: req.body.title,
+    //     author: req.body.author,
+    //     canBeDownloaded: req.body.canBeDownloaded ?? true,
+    //     minAgeRestriction: req.body.minAgeRestriction ?? null,
+    //     createdAt: new Date().toISOString(),
+    //     publicationDate: new Date().toISOString(),
+    //     availableResolutions: req.body.availableResolutions ?? ["P146"],
+    // };
+    //
+    // videos.push(newVideo);
+    // res.status(CodeResponsesEnum.Created_201).send(newVideo);
     var _a, _b, _c;
+    const originalDate = new Date();
+    const targetTimezone = 'Europe/Minsk'; // Или другой часовой пояс
+    const formatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: targetTimezone,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZoneName: 'short'
+    });
+    const formattedDate = formatter.format(originalDate);
+    const isoString = originalDate.toISOString().split('T')[1];
     const newVideo = {
         id: +(new Date()),
         title: req.body.title,
         author: req.body.author,
         canBeDownloaded: (_a = req.body.canBeDownloaded) !== null && _a !== void 0 ? _a : true,
         minAgeRestriction: (_b = req.body.minAgeRestriction) !== null && _b !== void 0 ? _b : null,
-        createdAt: new Date().toISOString(),
-        publicationDate: new Date().toISOString(),
+        createdAt: `${formattedDate}.${isoString}Z`,
+        publicationDate: `${formattedDate}.${isoString}Z`,
         availableResolutions: (_c = req.body.availableResolutions) !== null && _c !== void 0 ? _c : ["P146"],
     };
     exports.videos.push(newVideo);
