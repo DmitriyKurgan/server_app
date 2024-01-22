@@ -73,33 +73,33 @@ exports.videosRouter.delete('/:id', (req, res) => {
     }
     res.sendStatus(404);
 });
-exports.videosRouter.post('/', middlewares_1.validateRequest, (req, res) => {
+exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
+    var _a, _b, _c;
     const newVideo = {
         id: +(new Date()),
         title: req.body.title,
         author: req.body.author,
-        canBeDownloaded: true,
-        minAgeRestriction: null,
+        canBeDownloaded: (_a = req.body.canBeDownloaded) !== null && _a !== void 0 ? _a : true,
+        minAgeRestriction: (_b = req.body.minAgeRestriction) !== null && _b !== void 0 ? _b : null,
         createdAt: new Date().toISOString(),
         publicationDate: new Date().toISOString(),
-        availableResolutions: [
-            "P146"
-        ]
+        availableResolutions: (_c = req.body.availableResolutions) !== null && _c !== void 0 ? _c : ["P146"],
     };
     exports.videos.push(newVideo);
     res.status(CodeResponsesEnum.Created_201).send(newVideo);
 });
 exports.videosRouter.put('/:id', middlewares_1.validateRequest, (req, res) => {
+    var _a, _b, _c, _d, _e;
     const id = +req.params.id;
     const videoById = exports.videos.find(v => v.id === id);
     if (!videoById) {
         res.sendStatus(404);
     }
-    videoById.title = req.body.title;
-    videoById.author = req.body.author;
-    videoById.availableResolutions = req.body.availableResolutions;
-    videoById.canBeDownloaded = req.body.canBeDownloaded;
-    videoById.minAgeRestriction = req.body.minAgeRestriction;
+    videoById.title = (_a = req.body.title) !== null && _a !== void 0 ? _a : videoById.title;
+    videoById.author = (_b = req.body.author) !== null && _b !== void 0 ? _b : videoById.author;
+    videoById.availableResolutions = (_c = req.body.availableResolutions) !== null && _c !== void 0 ? _c : videoById.availableResolutions;
+    videoById.canBeDownloaded = (_d = req.body.canBeDownloaded) !== null && _d !== void 0 ? _d : videoById.canBeDownloaded;
+    videoById.minAgeRestriction = (_e = req.body.minAgeRestriction) !== null && _e !== void 0 ? _e : videoById.minAgeRestriction;
     videoById.publicationDate = new Date().toISOString();
     res.status(204).send(videoById);
 });

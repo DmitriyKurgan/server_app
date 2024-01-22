@@ -90,25 +90,21 @@ videosRouter.delete('/:id', (req:Request, res:Response)=>{
     res.sendStatus(404)
 })
 
-videosRouter.post('/', validateRequest, (req:Request, res:Response)=>{
+videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
+    const newVideo: VideoType = {
+        id: +(new Date()),
+        title: req.body.title,
+        author: req.body.author,
+        canBeDownloaded: req.body.canBeDownloaded ?? true,
+        minAgeRestriction: req.body.minAgeRestriction ?? null,
+        createdAt: new Date().toISOString(),
+        publicationDate: new Date().toISOString(),
+        availableResolutions: req.body.availableResolutions ?? ["P146"],
+    };
 
-   const newVideo = {
-       id: +(new Date()),
-       title: req.body.title,
-       author: req.body.author,
-       canBeDownloaded: true,
-       minAgeRestriction: null,
-       createdAt: new Date().toISOString(),
-       publicationDate: new Date().toISOString(),
-       availableResolutions: [
-           "P146"
-       ]
-   };
-
-   videos.push(newVideo);
-   res.status(CodeResponsesEnum.Created_201).send(newVideo);
-
-})
+    videos.push(newVideo);
+    res.status(CodeResponsesEnum.Created_201).send(newVideo);
+});
 
 videosRouter.put('/:id', validateRequest,(req:Request, res:Response)=>{
     const id = +req.params.id;
@@ -117,12 +113,12 @@ videosRouter.put('/:id', validateRequest,(req:Request, res:Response)=>{
         res.sendStatus(404)
     }
 
-    videoById.title = req.body.title
-    videoById.author = req.body.author
-    videoById.availableResolutions = req.body.availableResolutions
-    videoById.canBeDownloaded = req.body.canBeDownloaded
-    videoById.minAgeRestriction = req.body.minAgeRestriction
-    videoById.publicationDate = new Date().toISOString()
+    videoById.title = req.body.title ?? videoById.title;
+    videoById.author = req.body.author ?? videoById.author;
+    videoById.availableResolutions = req.body.availableResolutions ?? videoById.availableResolutions;
+    videoById.canBeDownloaded = req.body.canBeDownloaded ?? videoById.canBeDownloaded;
+    videoById.minAgeRestriction = req.body.minAgeRestriction ?? videoById.minAgeRestriction;
+    videoById.publicationDate = new Date().toISOString();
 
     res.status(204).send(videoById)
 
