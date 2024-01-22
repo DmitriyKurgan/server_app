@@ -26,15 +26,14 @@ export const validateRequest = [
         return true;
     }),
     body('publicationDate').optional().isISO8601(), // Поле может быть опциональным и должно быть в формате даты и времени ISO 8601
-    // Обработка ошибок валидации
     (req: Request, res: Response, next: NextFunction) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            const errorMessages = errors.array().map((error:any) => ({
+            const errorMessages = errors.array().map((error: any) => ({
                 message: error.msg,
                 field: error.param
             }));
-            return res.status(400).json({ errorsMessages: errorMessages } as any);
+            return res.status(400).json({ errorsMessages: errorMessages });
         }
         next();
     }
