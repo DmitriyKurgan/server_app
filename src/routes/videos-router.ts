@@ -69,12 +69,12 @@ videosRouter.get('/', (req: Request, res: Response) => {
 })
 
 videosRouter.get('/:id', (req: Request, res: Response) => {
-    const id = req.params.id;
-    if (id) {
-        res.send(videos.filter(p => p.id.toString() === id)).status(200)
-    } else {
-        res.send(videos).status(200)
+    const id = +req.params.id;
+    const videoById = videos.find(v => v.id === id)
+    if (!id && !videoById) {
+        res.sendStatus(404)
     }
+    res.status(200).send(videoById)
 })
 
 
@@ -91,6 +91,7 @@ videosRouter.delete('/:id', (req:Request, res:Response)=>{
 })
 
 videosRouter.post('/', validateRequest, (req:Request, res:Response)=>{
+
    const newVideo = {
        id: +(new Date()),
        title: req.body.title,
@@ -106,5 +107,23 @@ videosRouter.post('/', validateRequest, (req:Request, res:Response)=>{
 
    videos.push(newVideo);
    res.status(CodeResponsesEnum.Created_201).send(newVideo);
+
+})
+
+videosRouter.put('/:id', validateRequest,(req:Request, res:Response)=>{
+    const id = +req.params.id;
+    const videoById = videos.find(v => v.id === id)
+    if (!videoById){
+        res.sendStatus(404)
+    }
+
+    videoById.title = req.body.title
+    videoById.author = req.body.author
+    videoById.availableResolutions = req.body.availableResolutions
+    videoById.canBeDownloaded = req.body.canBeDownloaded
+    videoById.minAgeRestriction = req.body.minAgeRestriction
+    videoById.publicationDate = new Date().toISOString()
+
+    res.status(204).send(videoById)
 
 })

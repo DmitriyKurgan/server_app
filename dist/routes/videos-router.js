@@ -55,13 +55,12 @@ exports.videosRouter.get('/', (req, res) => {
     res.send(exports.videos).status(200);
 });
 exports.videosRouter.get('/:id', (req, res) => {
-    const id = req.params.id;
-    if (id) {
-        res.send(exports.videos.filter(p => p.id.toString() === id)).status(200);
+    const id = +req.params.id;
+    const videoById = exports.videos.find(v => v.id === id);
+    if (!id && !videoById) {
+        res.sendStatus(404);
     }
-    else {
-        res.send(exports.videos).status(200);
-    }
+    res.status(200).send(videoById);
 });
 exports.videosRouter.delete('/:id', (req, res) => {
     const id = +req.params.id;
@@ -89,4 +88,18 @@ exports.videosRouter.post('/', middlewares_1.validateRequest, (req, res) => {
     };
     exports.videos.push(newVideo);
     res.status(CodeResponsesEnum.Created_201).send(newVideo);
+});
+exports.videosRouter.put('/:id', middlewares_1.validateRequest, (req, res) => {
+    const id = +req.params.id;
+    const videoById = exports.videos.find(v => v.id === id);
+    if (!videoById) {
+        res.sendStatus(404);
+    }
+    videoById.title = req.body.title;
+    videoById.author = req.body.author;
+    videoById.availableResolutions = req.body.availableResolutions;
+    videoById.canBeDownloaded = req.body.canBeDownloaded;
+    videoById.minAgeRestriction = req.body.minAgeRestriction;
+    videoById.publicationDate = new Date().toISOString();
+    res.status(204).send(videoById);
 });
