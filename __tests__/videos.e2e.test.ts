@@ -1,6 +1,9 @@
 import request from 'supertest'
-import { app } from '../src/settings'import dotenv from 'dotenv'
-dotenv.config()
+import {app} from "../src";
+import {CodeResponsesEnum, VideoType} from "../src/routes/videos-router";
+// import { app } from '../src/settings'import dotenv from 'dotenv'
+// dotenv.config()
+
 
 
 const dbName = 'back'
@@ -8,16 +11,16 @@ const mongoURI = process.env.mongoURI || `mongodb://0.0.0.0:27017/${dbName}`
 
 describe('/videos', () => {
     let newVideo: VideoType | null = null
-    const client = new MongoClient(mongoURI)
+   // const client = new MongoClient(mongoURI)
 
     beforeAll(async () => {
-        await client.connect()
+        //await client.connect()
         await request(app).delete('/testing/all-data').expect(204)
     })
 
-    afterAll(async () => {
-        await client.close()
-    })
+    // afterAll(async () => {
+    //     await client.close()
+    // })
 
     it('GET products = []', async () => {
         await request(app).get('/videos/').expect([])

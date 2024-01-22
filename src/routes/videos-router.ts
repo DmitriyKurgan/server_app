@@ -1,6 +1,25 @@
 import {Request, Response, Router} from "express";
+import {STATUS_CODES} from "http";
 
 export const videosRouter = Router({});
+
+export enum CodeResponsesEnum {
+    Incorrect_values_400 = 400,
+    Not_found_404 = 404,
+    Not_content_204 = 204,
+    Created_201 = 201,
+}
+
+export type VideoType = {
+    id: number
+    title: string
+    author: string
+    canBeDownloaded: boolean
+    minAgeRestriction: number | null
+    createdAt: string
+    publicationDate: string
+    availableResolutions: string []
+}
 
 const videos = [
     {
@@ -67,4 +86,23 @@ videosRouter.delete('/:id', (req:Request, res:Response)=>{
         return false
     }
     res.sendStatus(404)
+})
+
+videosRouter.post('/', (req:Request, res:Response)=>{
+   const newVideo = {
+       id: +(new Date()),
+       title: req.body.title,
+       author: "Dima",
+       canBeDownloaded: true,
+       minAgeRestriction: null,
+       createdAt: "2023-05-21T14:15:27.020Z",
+       publicationDate: "2023-05-21T14:15:27.020Z",
+       availableResolutions: [
+           "P146"
+       ]
+   };
+
+   videos.push(newVideo);
+   res.status(CodeResponsesEnum.Created_201).send(newVideo);
+
 })

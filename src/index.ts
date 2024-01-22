@@ -1,13 +1,16 @@
 import express, {Request,Response} from 'express';
 import {videosRouter} from "./routes/videos-router";
+import bodyParser from "body-parser";
 
-const app = express();
+export const app = express();
 
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const parserMiddleware = bodyParser({})
+app.use(parserMiddleware)
 
 app.use('/videos', videosRouter);
 

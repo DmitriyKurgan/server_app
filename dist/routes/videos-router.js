@@ -1,8 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.videosRouter = void 0;
+exports.CodeResponsesEnum = exports.videosRouter = void 0;
 const express_1 = require("express");
 exports.videosRouter = (0, express_1.Router)({});
+var CodeResponsesEnum;
+(function (CodeResponsesEnum) {
+    CodeResponsesEnum[CodeResponsesEnum["Incorrect_values_400"] = 400] = "Incorrect_values_400";
+    CodeResponsesEnum[CodeResponsesEnum["Not_found_404"] = 404] = "Not_found_404";
+    CodeResponsesEnum[CodeResponsesEnum["Not_content_204"] = 204] = "Not_content_204";
+    CodeResponsesEnum[CodeResponsesEnum["Created_201"] = 201] = "Created_201";
+})(CodeResponsesEnum = exports.CodeResponsesEnum || (exports.CodeResponsesEnum = {}));
 const videos = [
     {
         id: 0,
@@ -64,4 +71,20 @@ exports.videosRouter.delete('/:id', (req, res) => {
         return false;
     }
     res.sendStatus(404);
+});
+exports.videosRouter.post('/', (req, res) => {
+    const newVideo = {
+        id: +(new Date()),
+        title: req.body.title,
+        author: "Dima",
+        canBeDownloaded: true,
+        minAgeRestriction: null,
+        createdAt: "2023-05-21T14:15:27.020Z",
+        publicationDate: "2023-05-21T14:15:27.020Z",
+        availableResolutions: [
+            "P146"
+        ]
+    };
+    videos.push(newVideo);
+    res.status(CodeResponsesEnum.Created_201).send(newVideo);
 });
