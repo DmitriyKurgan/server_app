@@ -18,8 +18,7 @@ exports.app.get('/', (req, res) => {
     res.send('DEFAULT GET REQUEST');
 });
 exports.app.delete('/testing/all-data', (req, res) => {
-    console.log(req);
-    res.status(204).send();
+    res.status(204).send(videos_router_1.videos);
 });
 exports.app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

@@ -1,5 +1,5 @@
 import express, {Request,Response} from 'express';
-import {videosRouter} from "./routes/videos-router";
+import {videos, videosRouter} from "./routes/videos-router";
 import bodyParser from "body-parser";
 
 export const app = express();
@@ -19,8 +19,8 @@ app.get('/', (req:Request, res:Response)=>{
 });
 
 app.delete('/testing/all-data', (req: Request, res: Response) => {
-    console.log(req);
-    res.status(204).send();
+
+    res.status(204).send(videos);
 });
 
 

@@ -21,45 +21,46 @@ export type VideoType = {
     availableResolutions: string []
 }
 
-const videos = [
-    {
-        id: 0,
-        title: "React",
-        author: "Dima",
-        canBeDownloaded: true,
-        minAgeRestriction: null,
-        createdAt: "2023-05-21T14:13:27.020Z",
-        publicationDate: "2023-05-21T14:13:27.020Z",
-        availableResolutions: [
-            "P144"
-        ]
-    },
-    {
-        id: 1,
-        title: "Redux",
-        author: "Dima",
-        canBeDownloaded: true,
-        minAgeRestriction: null,
-        createdAt: "2023-05-21T14:14:27.020Z",
-        publicationDate: "2023-05-21T14:14:27.020Z",
-        availableResolutions: [
-            "P145"
-        ]
-    },
-    {
-        id: 2,
-        title: "TypeScript",
-        author: "Dima",
-        canBeDownloaded: true,
-        minAgeRestriction: null,
-        createdAt: "2023-05-21T14:15:27.020Z",
-        publicationDate: "2023-05-21T14:15:27.020Z",
-        availableResolutions: [
-            "P146"
-        ]
-    },
+//const videos = [
+    // {
+    //     id: 0,
+    //     title: "React",
+    //     author: "Dima",
+    //     canBeDownloaded: true,
+    //     minAgeRestriction: null,
+    //     createdAt: new Date().toISOString(),
+    //     publicationDate: new Date().toISOString(),
+    //     availableResolutions: [
+    //         "P144"
+    //     ]
+    // },
+    // {
+    //     id: 1,
+    //     title: "Redux",
+    //     author: "Dima",
+    //     canBeDownloaded: true,
+    //     minAgeRestriction: null,
+    //     createdAt: new Date().toISOString(),
+    //     publicationDate: new Date().toISOString(),
+    //     availableResolutions: [
+    //         "P145"
+    //     ]
+    // },
+    // {
+    //     id: 2,
+    //     title: "TypeScript",
+    //     author: "Dima",
+    //     canBeDownloaded: true,
+    //     minAgeRestriction: null,
+    //     createdAt: new Date().toISOString(),
+    //     publicationDate: new Date().toISOString(),
+    //     availableResolutions: [
+    //         "P146"
+    //     ]
+    // },
+// ];
 
-];
+export const videos = [] as any []
 
 //all videos request
 videosRouter.get('/', (req: Request, res: Response) => {
@@ -92,11 +93,11 @@ videosRouter.post('/', (req:Request, res:Response)=>{
    const newVideo = {
        id: +(new Date()),
        title: req.body.title,
-       author: "Dima",
+       author: req.body.author,
        canBeDownloaded: true,
        minAgeRestriction: null,
-       createdAt: "2023-05-21T14:15:27.020Z",
-       publicationDate: "2023-05-21T14:15:27.020Z",
+       createdAt: new Date().toISOString(),
+       publicationDate: new Date().toISOString(),
        availableResolutions: [
            "P146"
        ]

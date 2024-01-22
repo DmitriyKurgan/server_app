@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CodeResponsesEnum = exports.videosRouter = void 0;
+exports.videos = exports.CodeResponsesEnum = exports.videosRouter = void 0;
 const express_1 = require("express");
 exports.videosRouter = (0, express_1.Router)({});
 var CodeResponsesEnum;
@@ -10,62 +10,63 @@ var CodeResponsesEnum;
     CodeResponsesEnum[CodeResponsesEnum["Not_content_204"] = 204] = "Not_content_204";
     CodeResponsesEnum[CodeResponsesEnum["Created_201"] = 201] = "Created_201";
 })(CodeResponsesEnum = exports.CodeResponsesEnum || (exports.CodeResponsesEnum = {}));
-const videos = [
-    {
-        id: 0,
-        title: "React",
-        author: "Dima",
-        canBeDownloaded: true,
-        minAgeRestriction: null,
-        createdAt: "2023-05-21T14:13:27.020Z",
-        publicationDate: "2023-05-21T14:13:27.020Z",
-        availableResolutions: [
-            "P144"
-        ]
-    },
-    {
-        id: 1,
-        title: "Redux",
-        author: "Dima",
-        canBeDownloaded: true,
-        minAgeRestriction: null,
-        createdAt: "2023-05-21T14:14:27.020Z",
-        publicationDate: "2023-05-21T14:14:27.020Z",
-        availableResolutions: [
-            "P145"
-        ]
-    },
-    {
-        id: 2,
-        title: "TypeScript",
-        author: "Dima",
-        canBeDownloaded: true,
-        minAgeRestriction: null,
-        createdAt: "2023-05-21T14:15:27.020Z",
-        publicationDate: "2023-05-21T14:15:27.020Z",
-        availableResolutions: [
-            "P146"
-        ]
-    },
-];
+//const videos = [
+// {
+//     id: 0,
+//     title: "React",
+//     author: "Dima",
+//     canBeDownloaded: true,
+//     minAgeRestriction: null,
+//     createdAt: new Date().toISOString(),
+//     publicationDate: new Date().toISOString(),
+//     availableResolutions: [
+//         "P144"
+//     ]
+// },
+// {
+//     id: 1,
+//     title: "Redux",
+//     author: "Dima",
+//     canBeDownloaded: true,
+//     minAgeRestriction: null,
+//     createdAt: new Date().toISOString(),
+//     publicationDate: new Date().toISOString(),
+//     availableResolutions: [
+//         "P145"
+//     ]
+// },
+// {
+//     id: 2,
+//     title: "TypeScript",
+//     author: "Dima",
+//     canBeDownloaded: true,
+//     minAgeRestriction: null,
+//     createdAt: new Date().toISOString(),
+//     publicationDate: new Date().toISOString(),
+//     availableResolutions: [
+//         "P146"
+//     ]
+// },
+// ];
+exports.videos = [];
 //all videos request
 exports.videosRouter.get('/', (req, res) => {
-    res.send(videos).status(200);
+    res.send(exports.videos).status(200);
 });
 exports.videosRouter.get('/:id', (req, res) => {
     const id = req.params.id;
     if (id) {
-        res.send(videos.filter(p => p.id.toString() === id)).status(200);
+        res.send(exports.videos.filter(p => p.id.toString() === id)).status(200);
     }
     else {
-        res.send(videos).status(200);
+        res.send(exports.videos).status(200);
     }
 });
 exports.videosRouter.delete('/:id', (req, res) => {
     const id = +req.params.id;
-    for (let i = 0; i < videos.length; i++) {
-        if (videos[i].id === id) {
-            videos.splice(i, 1);
+    for (let i = 0; i < exports.videos.length; i++) {
+        if (exports.videos[i].id === id) {
+            exports.videos.splice(i, 1);
             res.sendStatus(204);
         }
         return false;
@@ -76,15 +77,15 @@ exports.videosRouter.post('/', (req, res) => {
     const newVideo = {
         id: +(new Date()),
         title: req.body.title,
-        author: "Dima",
+        author: req.body.author,
         canBeDownloaded: true,
         minAgeRestriction: null,
-        createdAt: "2023-05-21T14:15:27.020Z",
-        publicationDate: "2023-05-21T14:15:27.020Z",
+        createdAt: new Date().toISOString(),
+        publicationDate: new Date().toISOString(),
         availableResolutions: [
             "P146"
         ]
     };
-    videos.push(newVideo);
+    exports.videos.push(newVideo);
     res.status(CodeResponsesEnum.Created_201).send(newVideo);
 });
