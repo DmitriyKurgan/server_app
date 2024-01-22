@@ -81,8 +81,10 @@ exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
         author: req.body.author,
         canBeDownloaded: (_a = req.body.canBeDownloaded) !== null && _a !== void 0 ? _a : true,
         minAgeRestriction: (_b = req.body.minAgeRestriction) !== null && _b !== void 0 ? _b : null,
-        createdAt: new Date().toISOString(),
-        publicationDate: new Date().toISOString(),
+        createdAt: "2024-01-25T22:27:01.859Z",
+        //createdAt: new Date().toISOString(),
+        publicationDate: "2024-01-25T22:27:01.859Z",
+        //publicationDate: new Date().toISOString(),
         availableResolutions: (_c = req.body.availableResolutions) !== null && _c !== void 0 ? _c : ["P146"],
     };
     exports.videos.push(newVideo);

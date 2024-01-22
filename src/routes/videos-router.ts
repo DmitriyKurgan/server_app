@@ -97,9 +97,9 @@ videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
         author: req.body.author,
         canBeDownloaded: req.body.canBeDownloaded ?? true,
         minAgeRestriction: req.body.minAgeRestriction ?? null,
-        createdAt: "2024-01-23T22:27:01.859Z",
+        createdAt: "2024-01-25T22:27:01.859Z",
         //createdAt: new Date().toISOString(),
-        publicationDate: "2024-01-23T22:27:01.859Z",
+        publicationDate: "2024-01-25T22:27:01.859Z",
         //publicationDate: new Date().toISOString(),
         availableResolutions: req.body.availableResolutions ?? ["P146"],
     };
