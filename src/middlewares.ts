@@ -27,9 +27,10 @@ export const validateRequest = [
     (req: Request, res: Response, next: NextFunction) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            debugger
             const errorMessages = errors.array().map((error: any) => ({
-               // message: error.msg,
-                field: error.param
+                message: error.msg,
+                field: error.path
             }));
             return res.status(400).json({ errorsMessages: errorMessages });
         }
