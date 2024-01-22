@@ -12,6 +12,10 @@ app.use(express.urlencoded({ extended: true }));
 const parserMiddleware = bodyParser({})
 app.use(parserMiddleware)
 
+
+
+
+
 app.use('/videos', videosRouter);
 
 app.get('/', (req:Request, res:Response)=>{

@@ -1,5 +1,6 @@
 import {Request, Response, Router} from "express";
 import {STATUS_CODES} from "http";
+import {validateRequest} from "../middlewares";
 
 export const videosRouter = Router({});
 
@@ -89,7 +90,7 @@ videosRouter.delete('/:id', (req:Request, res:Response)=>{
     res.sendStatus(404)
 })
 
-videosRouter.post('/', (req:Request, res:Response)=>{
+videosRouter.post('/', validateRequest, (req:Request, res:Response)=>{
    const newVideo = {
        id: +(new Date()),
        title: req.body.title,

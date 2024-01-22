@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.videos = exports.CodeResponsesEnum = exports.videosRouter = void 0;
 const express_1 = require("express");
+const middlewares_1 = require("../middlewares");
 exports.videosRouter = (0, express_1.Router)({});
 var CodeResponsesEnum;
 (function (CodeResponsesEnum) {
@@ -73,7 +74,7 @@ exports.videosRouter.delete('/:id', (req, res) => {
     }
     res.sendStatus(404);
 });
-exports.videosRouter.post('/', (req, res) => {
+exports.videosRouter.post('/', middlewares_1.validateRequest, (req, res) => {
     const newVideo = {
         id: +(new Date()),
         title: req.body.title,
