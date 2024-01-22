@@ -3,7 +3,7 @@ import {STATUS_CODES} from "http";
 import {validateRequest} from "../middlewares";
 
 export const videosRouter = Router({});
-
+process.env.TZ = 'Europe/Minsk';
 export enum CodeResponsesEnum {
     Incorrect_values_400 = 400,
     Not_found_404 = 404,
@@ -97,10 +97,8 @@ videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
         author: req.body.author,
         canBeDownloaded: req.body.canBeDownloaded ?? true,
         minAgeRestriction: req.body.minAgeRestriction ?? null,
-        createdAt: "2024-01-25T22:27:01.859Z",
-        //createdAt: new Date().toISOString(),
-        publicationDate: "2024-01-25T22:27:01.859Z",
-        //publicationDate: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
+        publicationDate: new Date().toISOString(),
         availableResolutions: req.body.availableResolutions ?? ["P146"],
     };
 
