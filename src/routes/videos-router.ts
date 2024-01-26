@@ -103,7 +103,7 @@ debugger
         id: +(new Date()),
         title: req.body.title,
         author: req.body.author,
-        canBeDownloaded: req.body.canBeDownloaded ?? true,
+        canBeDownloaded: req.body.canBeDownloaded,
         minAgeRestriction: req.body.minAgeRestriction ?? null,
         createdAt: new Date().toISOString(),
         publicationDate: formattedDate,
