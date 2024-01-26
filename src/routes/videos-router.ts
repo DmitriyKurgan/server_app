@@ -93,10 +93,8 @@ videosRouter.delete('/:id', (req:Request, res:Response)=>{
 videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + 1);
-    const newDate = new Date(currentDate.getTime()); // прибавляем смещение к дате
-
+    const newDate = new Date(currentDate.getTime());
     const formattedDate = newDate.toISOString()
-debugger
     const newVideo: VideoType = {
         id: +(new Date()),
         title: req.body.title,
@@ -116,9 +114,6 @@ debugger
 videosRouter.put('/:id', validateRequest,(req:Request, res:Response)=>{
     const id = +req.params.id;
     const videoById = videos.find(v => v.id === id)
-    const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() - 1);
-    const newDate = new Date(currentDate.getTime());
     if (!videoById){
         res.sendStatus(404)
     }
@@ -128,7 +123,7 @@ videosRouter.put('/:id', validateRequest,(req:Request, res:Response)=>{
     videoById.availableResolutions = req.body.availableResolutions ?? videoById.availableResolutions;
     videoById.canBeDownloaded = req.body.canBeDownloaded ?? videoById.canBeDownloaded;
     videoById.minAgeRestriction = req.body.minAgeRestriction ?? videoById.minAgeRestriction;
-    videoById.publicationDate = newDate;
+    videoById.publicationDate = new Date().toISOString();
 
     res.status(204).send(videoById)
 
