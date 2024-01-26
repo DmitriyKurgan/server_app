@@ -75,7 +75,7 @@ exports.videosRouter.delete('/:id', (req, res) => {
     res.sendStatus(404);
 });
 exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
-    var _a, _b, _c;
+    var _a, _b;
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + 1);
     const offset = currentDate.getTimezoneOffset(); // получаем смещение часового пояса в минутах
@@ -86,11 +86,11 @@ exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
         id: +(new Date()),
         title: req.body.title,
         author: req.body.author,
-        canBeDownloaded: (_a = req.body.canBeDownloaded) !== null && _a !== void 0 ? _a : true,
-        minAgeRestriction: (_b = req.body.minAgeRestriction) !== null && _b !== void 0 ? _b : null,
+        canBeDownloaded: req.body.canBeDownloaded,
+        minAgeRestriction: (_a = req.body.minAgeRestriction) !== null && _a !== void 0 ? _a : null,
         createdAt: new Date().toISOString(),
         publicationDate: formattedDate,
-        availableResolutions: (_c = req.body.availableResolutions) !== null && _c !== void 0 ? _c : ["P146"],
+        availableResolutions: (_b = req.body.availableResolutions) !== null && _b !== void 0 ? _b : ["P146"],
     };
     exports.videos.push(newVideo);
     res.status(CodeResponsesEnum.Created_201).send(newVideo);
