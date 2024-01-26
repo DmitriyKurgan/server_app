@@ -92,7 +92,7 @@ videosRouter.delete('/:id', (req:Request, res:Response)=>{
 
 videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1);
+    currentDate.setDate(currentDate.getDate() + 2);
 
     const newVideo: VideoType = {
         id: +(new Date()),
