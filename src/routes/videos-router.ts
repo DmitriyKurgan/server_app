@@ -105,7 +105,7 @@ debugger
         author: req.body.author,
         canBeDownloaded: req.body.canBeDownloaded ?? true,
         minAgeRestriction: req.body.minAgeRestriction ?? null,
-        createdAt: new Date().toISOString(),
+        createdAt: formattedDate,
         publicationDate: formattedDate,
         availableResolutions: req.body.availableResolutions ?? ["P146"],
     };

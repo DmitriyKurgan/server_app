@@ -80,7 +80,7 @@ exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
     currentDate.setDate(currentDate.getDate() + 1);
     const offset = currentDate.getTimezoneOffset(); // получаем смещение часового пояса в минутах
     const newDate = new Date(currentDate.getTime() - offset * 60 * 1000); // прибавляем смещение к дате
-    const formattedDate = newDate.toISOString().replace(/\.\d+Z$/, 'Z');
+    const formattedDate = newDate.toISOString();
     debugger;
     const newVideo = {
         id: +(new Date()),
@@ -88,7 +88,7 @@ exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
         author: req.body.author,
         canBeDownloaded: (_a = req.body.canBeDownloaded) !== null && _a !== void 0 ? _a : true,
         minAgeRestriction: (_b = req.body.minAgeRestriction) !== null && _b !== void 0 ? _b : null,
-        createdAt: new Date().toISOString(),
+        createdAt: formattedDate,
         publicationDate: formattedDate,
         availableResolutions: (_c = req.body.availableResolutions) !== null && _c !== void 0 ? _c : ["P146"],
     };
