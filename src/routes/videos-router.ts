@@ -91,14 +91,17 @@ videosRouter.delete('/:id', (req:Request, res:Response)=>{
 })
 
 videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 1);
+
     const newVideo: VideoType = {
         id: +(new Date()),
         title: req.body.title,
         author: req.body.author,
         canBeDownloaded: req.body.canBeDownloaded ?? true,
         minAgeRestriction: req.body.minAgeRestriction ?? null,
-        createdAt: new Date().setUTCDate(new Date().getUTCDate() + 1).toString(),
-        publicationDate: new Date().setUTCDate(new Date().getUTCDate() + 1).toString(),
+        createdAt: currentDate.toISOString(),
+        publicationDate: currentDate.toISOString(),
         availableResolutions: req.body.availableResolutions ?? ["P146"],
     };
 

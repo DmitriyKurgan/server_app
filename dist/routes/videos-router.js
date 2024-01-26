@@ -76,14 +76,16 @@ exports.videosRouter.delete('/:id', (req, res) => {
 });
 exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
     var _a, _b, _c;
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 1);
     const newVideo = {
         id: +(new Date()),
         title: req.body.title,
         author: req.body.author,
         canBeDownloaded: (_a = req.body.canBeDownloaded) !== null && _a !== void 0 ? _a : true,
         minAgeRestriction: (_b = req.body.minAgeRestriction) !== null && _b !== void 0 ? _b : null,
-        createdAt: new Date().setUTCDate(new Date().getUTCDate() + 1).toString(),
-        publicationDate: new Date().setUTCDate(new Date().getUTCDate() + 1).toString(),
+        createdAt: currentDate.toISOString(),
+        publicationDate: currentDate.toISOString(),
         availableResolutions: (_c = req.body.availableResolutions) !== null && _c !== void 0 ? _c : ["P146"],
     };
     exports.videos.push(newVideo);
