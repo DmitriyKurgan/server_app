@@ -92,18 +92,24 @@ videosRouter.delete('/:id', (req:Request, res:Response)=>{
 
 videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 2);
+    currentDate.setDate(currentDate.getDate() + 1);
 
+    const offset = currentDate.getTimezoneOffset(); // получаем смещение часового пояса в минутах
+    const newDate = new Date(currentDate.getTime() - offset * 60 * 1000); // прибавляем смещение к дате
+
+    const formattedDate = newDate.toISOString().replace(/\.\d+Z$/, 'Z');
+debugger
     const newVideo: VideoType = {
         id: +(new Date()),
         title: req.body.title,
         author: req.body.author,
         canBeDownloaded: req.body.canBeDownloaded ?? true,
         minAgeRestriction: req.body.minAgeRestriction ?? null,
-        createdAt: currentDate.toISOString(),
-        publicationDate: currentDate.toISOString(),
+        createdAt: new Date().toISOString(),
+        publicationDate: formattedDate,
         availableResolutions: req.body.availableResolutions ?? ["P146"],
     };
+
 
     videos.push(newVideo);
     res.status(CodeResponsesEnum.Created_201).send(newVideo);

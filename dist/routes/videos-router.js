@@ -78,14 +78,18 @@ exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
     var _a, _b, _c;
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + 1);
+    const offset = currentDate.getTimezoneOffset(); // получаем смещение часового пояса в минутах
+    const newDate = new Date(currentDate.getTime() - offset * 60 * 1000); // прибавляем смещение к дате
+    const formattedDate = newDate.toISOString().replace(/\.\d+Z$/, 'Z');
+    debugger;
     const newVideo = {
         id: +(new Date()),
         title: req.body.title,
         author: req.body.author,
         canBeDownloaded: (_a = req.body.canBeDownloaded) !== null && _a !== void 0 ? _a : true,
         minAgeRestriction: (_b = req.body.minAgeRestriction) !== null && _b !== void 0 ? _b : null,
-        createdAt: currentDate.toISOString(),
-        publicationDate: currentDate.toISOString(),
+        createdAt: new Date().toISOString(),
+        publicationDate: formattedDate,
         availableResolutions: (_c = req.body.availableResolutions) !== null && _c !== void 0 ? _c : ["P146"],
     };
     exports.videos.push(newVideo);
