@@ -97,7 +97,7 @@ videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
     const offset = currentDate.getTimezoneOffset(); // получаем смещение часового пояса в минутах
     const newDate = new Date(currentDate.getTime() - offset * 60 * 1000); // прибавляем смещение к дате
 
-    const formattedDate = newDate.toISOString().replace(/\.\d+Z$/, 'Z');
+    const formattedDate = newDate.toISOString()
 debugger
     const newVideo: VideoType = {
         id: +(new Date()),
