@@ -99,8 +99,8 @@ exports.videosRouter.put('/:id', middlewares_1.validateRequest, (req, res) => {
     const id = +req.params.id;
     const videoById = exports.videos.find(v => v.id === id);
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1);
-    const newDate = new Date(currentDate.getTime()); // прибавляем смещение к дате
+    currentDate.setDate(currentDate.getDate() - 1);
+    const newDate = new Date(currentDate.getTime());
     if (!videoById) {
         res.sendStatus(404);
     }

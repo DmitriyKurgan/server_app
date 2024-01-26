@@ -117,8 +117,8 @@ videosRouter.put('/:id', validateRequest,(req:Request, res:Response)=>{
     const id = +req.params.id;
     const videoById = videos.find(v => v.id === id)
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1);
-    const newDate = new Date(currentDate.getTime()); // прибавляем смещение к дате
+    currentDate.setDate(currentDate.getDate() - 1);
+    const newDate = new Date(currentDate.getTime());
     if (!videoById){
         res.sendStatus(404)
     }
