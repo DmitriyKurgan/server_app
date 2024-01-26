@@ -97,8 +97,8 @@ videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
         author: req.body.author,
         canBeDownloaded: req.body.canBeDownloaded ?? true,
         minAgeRestriction: req.body.minAgeRestriction ?? null,
-        createdAt: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
-        publicationDate: new Date().toLocaleString('en-US', { timeZone: 'UTC' }),
+        createdAt: new Date().toISOString().replace(/Z$/, ''),
+        publicationDate: new Date().toISOString().replace(/Z$/, ''),
         availableResolutions: req.body.availableResolutions ?? ["P146"],
     };
 
