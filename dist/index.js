@@ -7,7 +7,6 @@ exports.app = void 0;
 const express_1 = __importDefault(require("express"));
 const videos_router_1 = require("./routes/videos-router");
 const body_parser_1 = __importDefault(require("body-parser"));
-//import {db} from './db/db'
 exports.app = (0, express_1.default)();
 const port = process.env.PORT || 5000;
 exports.app.use(express_1.default.json());
@@ -15,7 +14,6 @@ exports.app.use(express_1.default.urlencoded({ extended: true }));
 const parserMiddleware = (0, body_parser_1.default)({});
 exports.app.use(parserMiddleware);
 exports.app.use('/videos', videos_router_1.videosRouter);
-//app.use('/__tests__', getTestRouter(db));
 exports.app.get('/', (req, res) => {
     res.send('DEFAULT GET REQUEST');
 });
