@@ -123,7 +123,7 @@ videosRouter.put('/:id', validateRequest,(req:Request, res:Response)=>{
     videoById.availableResolutions = req.body.availableResolutions ?? videoById.availableResolutions;
     videoById.canBeDownloaded = req.body.canBeDownloaded ?? videoById.canBeDownloaded;
     videoById.minAgeRestriction = req.body.minAgeRestriction ?? videoById.minAgeRestriction;
-    videoById.publicationDate = currentDate.setHours(currentDate.getHours() + 1);
+    videoById.publicationDate = new Date().toISOString();
 
     res.status(204).send(videoById)
 
