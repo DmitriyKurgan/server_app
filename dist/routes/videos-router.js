@@ -76,10 +76,6 @@ exports.videosRouter.delete('/:id', (req, res) => {
 });
 exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
     var _a, _b;
-    const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1);
-    const newDate = new Date(currentDate.getTime());
-    const formattedDate = newDate.toISOString();
     const newVideo = {
         id: +(new Date()),
         title: req.body.title,
@@ -87,7 +83,7 @@ exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
         canBeDownloaded: Boolean(req.body.canBeDownloaded),
         minAgeRestriction: (_a = req.body.minAgeRestriction) !== null && _a !== void 0 ? _a : null,
         createdAt: new Date().toISOString(),
-        publicationDate: formattedDate,
+        publicationDate: new Date().toISOString(),
         availableResolutions: (_b = req.body.availableResolutions) !== null && _b !== void 0 ? _b : ["P146"],
     };
     exports.videos.push(newVideo);
@@ -100,15 +96,11 @@ exports.videosRouter.put('/:id', middlewares_1.validateRequest, (req, res) => {
         res.sendStatus(404);
         return;
     }
-    const currentDate = new Date();
-    const modifiedDate = new Date(currentDate);
-    modifiedDate.setDate(currentDate.getDate() + 6);
     videoById.title = (_a = req.body.title) !== null && _a !== void 0 ? _a : videoById.title;
     videoById.author = (_b = req.body.author) !== null && _b !== void 0 ? _b : videoById.author;
     videoById.availableResolutions = (_c = req.body.availableResolutions) !== null && _c !== void 0 ? _c : videoById.availableResolutions;
     videoById.canBeDownloaded = (_d = req.body.canBeDownloaded) !== null && _d !== void 0 ? _d : videoById.canBeDownloaded;
     videoById.minAgeRestriction = (_e = req.body.minAgeRestriction) !== null && _e !== void 0 ? _e : videoById.minAgeRestriction;
-    modifiedDate.setMilliseconds(759);
-    videoById.publicationDate = modifiedDate.toISOString();
+    videoById.publicationDate = new Date().toISOString();
     res.status(204).send(videoById);
 });

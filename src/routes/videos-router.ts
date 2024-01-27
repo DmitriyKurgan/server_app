@@ -91,10 +91,6 @@ videosRouter.delete('/:id', (req:Request, res:Response)=>{
 })
 
 videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
-    const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1);
-    const newDate = new Date(currentDate.getTime());
-    const formattedDate = newDate.toISOString()
     const newVideo: VideoType = {
         id: +(new Date()),
         title: req.body.title,
@@ -102,7 +98,7 @@ videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
         canBeDownloaded: Boolean(req.body.canBeDownloaded),
         minAgeRestriction: req.body.minAgeRestriction ?? null,
         createdAt: new Date().toISOString(),
-        publicationDate: formattedDate,
+        publicationDate: new Date().toISOString(),
         availableResolutions: req.body.availableResolutions ?? ["P146"],
     };
 
@@ -118,17 +114,13 @@ videosRouter.put('/:id', validateRequest, (req: Request, res: Response) => {
         return;
     }
 
-    const currentDate = new Date();
-    const modifiedDate = new Date(currentDate);
-    modifiedDate.setDate(currentDate.getDate() + 6);
-
     videoById.title = req.body.title ?? videoById.title;
     videoById.author = req.body.author ?? videoById.author;
     videoById.availableResolutions = req.body.availableResolutions ?? videoById.availableResolutions;
     videoById.canBeDownloaded = req.body.canBeDownloaded ?? videoById.canBeDownloaded;
     videoById.minAgeRestriction = req.body.minAgeRestriction ?? videoById.minAgeRestriction;
 
-    videoById.publicationDate = modifiedDate.toISOString();
+    videoById.publicationDate = new Date().toISOString();
 
     res.status(204).send(videoById);
 });
