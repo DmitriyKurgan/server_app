@@ -108,7 +108,7 @@ exports.videosRouter.put('/:id', middlewares_1.validateRequest, (req, res) => {
     videoById.availableResolutions = (_c = req.body.availableResolutions) !== null && _c !== void 0 ? _c : videoById.availableResolutions;
     videoById.canBeDownloaded = (_d = req.body.canBeDownloaded) !== null && _d !== void 0 ? _d : videoById.canBeDownloaded;
     videoById.minAgeRestriction = (_e = req.body.minAgeRestriction) !== null && _e !== void 0 ? _e : videoById.minAgeRestriction;
-    modifiedDate.setMilliseconds(currentDate.getMilliseconds());
+    modifiedDate.setMilliseconds(modifiedDate.getMilliseconds() + 119);
     videoById.publicationDate = modifiedDate.toISOString();
     res.status(204).send(videoById);
 });
