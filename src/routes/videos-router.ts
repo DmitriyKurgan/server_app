@@ -128,11 +128,12 @@ videosRouter.put('/:id', validateRequest, (req: Request, res: Response) => {
     videoById.canBeDownloaded = req.body.canBeDownloaded ?? videoById.canBeDownloaded;
     videoById.minAgeRestriction = req.body.minAgeRestriction ?? videoById.minAgeRestriction;
 
-    modifiedDate.setMilliseconds(modifiedDate.getMilliseconds() -75);
+    modifiedDate.setMilliseconds(modifiedDate.getMilliseconds() - 183);
 
     videoById.publicationDate = modifiedDate.toISOString();
 
     res.status(204).send(videoById);
 });
+
 
 
