@@ -95,17 +95,18 @@ exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
 });
 exports.videosRouter.put('/:id', middlewares_1.validateRequest, (req, res) => {
     var _a, _b, _c, _d, _e;
-    const currentDate = new Date();
     const videoById = exports.videos.find(v => v.id === +req.params.id);
     if (!videoById) {
         res.sendStatus(404);
-        return;
     }
+    const currentDate = new Date();
+    const modifiedDate = new Date(currentDate);
+    modifiedDate.setDate(currentDate.getDate() + 6);
     videoById.title = (_a = req.body.title) !== null && _a !== void 0 ? _a : videoById.title;
     videoById.author = (_b = req.body.author) !== null && _b !== void 0 ? _b : videoById.author;
     videoById.availableResolutions = (_c = req.body.availableResolutions) !== null && _c !== void 0 ? _c : videoById.availableResolutions;
     videoById.canBeDownloaded = (_d = req.body.canBeDownloaded) !== null && _d !== void 0 ? _d : videoById.canBeDownloaded;
     videoById.minAgeRestriction = (_e = req.body.minAgeRestriction) !== null && _e !== void 0 ? _e : videoById.minAgeRestriction;
-    videoById.publicationDate = currentDate.toISOString();
+    videoById.publicationDate = modifiedDate.toISOString();
     res.status(204).send(videoById);
 });
