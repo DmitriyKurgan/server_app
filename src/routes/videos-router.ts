@@ -113,6 +113,7 @@ videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
 
 videosRouter.put('/:id', validateRequest,(req:Request, res:Response)=>{
     const currentDate = new Date();
+    currentDate.setHours(currentDate.getHours() + 1)
     const id = +req.params.id;
     const videoById = videos.find(v => v.id === id)
     if (!videoById){
@@ -124,7 +125,7 @@ videosRouter.put('/:id', validateRequest,(req:Request, res:Response)=>{
     videoById.availableResolutions = req.body.availableResolutions ?? videoById.availableResolutions;
     videoById.canBeDownloaded = req.body.canBeDownloaded ?? videoById.canBeDownloaded;
     videoById.minAgeRestriction = req.body.minAgeRestriction ?? videoById.minAgeRestriction;
-   // videoById.publicationDate = currentDate.toISOString();
+    videoById.publicationDate = videoById.createdAt.setHours(currentDate.getHours() + 1);
 
     res.status(204).send(videoById)
 
