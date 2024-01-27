@@ -111,11 +111,12 @@ videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
     res.status(CodeResponsesEnum.Created_201).send(newVideo);
 });
 
-videosRouter.put('/:id', validateRequest,(req:Request, res:Response)=>{
+videosRouter.put('/:id', validateRequest, (req: Request, res: Response) => {
     const currentDate = new Date();
     const videoById = videos.find(v => v.id === +req.params.id)
-    if (!videoById){
-        res.sendStatus(404)
+    if (!videoById) {
+        res.sendStatus(404);
+        return;
     }
 
     videoById.title = req.body.title ?? videoById.title;
@@ -123,8 +124,7 @@ videosRouter.put('/:id', validateRequest,(req:Request, res:Response)=>{
     videoById.availableResolutions = req.body.availableResolutions ?? videoById.availableResolutions;
     videoById.canBeDownloaded = req.body.canBeDownloaded ?? videoById.canBeDownloaded;
     videoById.minAgeRestriction = req.body.minAgeRestriction ?? videoById.minAgeRestriction;
-    videoById.publicationDate = new Date().toISOString();
+    videoById.publicationDate = currentDate.toISOString();
 
-    res.status(204).send(videoById)
-
-})
+    res.status(204).send(videoById);
+});

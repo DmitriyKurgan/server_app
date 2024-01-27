@@ -22,7 +22,7 @@ describe('/videos', () => {
     //     await client.close()
     // })
 
-    it('GET products = []', async () => {
+    it('GET videos = []', async () => {
         await request(app).get('/videos/').expect([])
     })
 
