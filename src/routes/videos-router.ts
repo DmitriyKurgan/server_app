@@ -71,7 +71,7 @@ videosRouter.get('/', (req: Request, res: Response) => {
 videosRouter.get('/:id', (req: Request, res: Response) => {
     const id = +req.params.id;
     const videoById = videos.find(v => v.id === id)
-    if (!id && !videoById) {
+    if (!videoById) {
         res.sendStatus(404)
     }
     res.status(200).send(videoById)
