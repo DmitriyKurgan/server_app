@@ -78,17 +78,18 @@ videosRouter.get('/:id', (req: Request, res: Response) => {
 })
 
 
-videosRouter.delete('/:id', (req:Request, res:Response)=>{
+videosRouter.delete('/:id', (req: Request, res: Response) => {
     const id = +req.params.id;
-    for(let i = 0; i < videos.length; i++){
-        if (videos[i].id === id){
-            videos.splice(i,1)
-            res.sendStatus(204)
+    for (let i = 0; i < videos.length; i++) {
+        if (videos[i].id === id) {
+            videos.splice(i, 1);
+            res.sendStatus(204);
+            return;
         }
-        return false
     }
-    res.sendStatus(404)
-})
+    res.sendStatus(404);
+});
+
 
 videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
     const currentDate = new Date();

@@ -1,6 +1,7 @@
 import request from 'supertest';
 import { CodeResponsesEnum, VideoType } from "../routes/videos-router";
-import {apps} from "../index";
+import {app} from "../app_settings";
+
 
 describe('/videos', () => {
     let newVideo: VideoType | null = null;
@@ -22,7 +23,7 @@ describe('/videos', () => {
 
 
     it('GET /videos should return all videos', async () => {
-        const res = await request(apps).get('/videos/').expect(200);
+        const res = await request(app).get('/videos/').expect(200);
         expect(res.body).toHaveLength(1);
         expect(res.body[0]).toEqual(newVideo);
     });

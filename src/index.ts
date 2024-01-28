@@ -1,30 +1,31 @@
 import express, {Request,Response} from 'express';
 import {videos, videosRouter} from "./routes/videos-router";
 import bodyParser from "body-parser";
-export const apps = express();
+import {app} from "./app_settings";
+
 
 const port = process.env.PORT || 5000;
 
-apps.use(express.json());
-apps.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const parserMiddleware = bodyParser({})
-apps.use(parserMiddleware)
+app.use(parserMiddleware)
 
 
-apps.use('/videos', videosRouter);
+app.use('/videos', videosRouter);
 
-apps.get('/', (req:Request, res:Response)=>{
+app.get('/', (req:Request, res:Response)=>{
     res.send('DEFAULT GET REQUEST')
 });
 
-apps.delete('/testing/all-data', (req: Request, res: Response) => {
+app.delete('/testing/all-data', (req: Request, res: Response) => {
 
     res.status(204).send(videos);
 });
 
-apps.listen(port, ()=>{
+app.listen(port, ()=>{
     console.log(`Example app listening on port ${port}`)
 });
 
-module.exports.apps = apps
+module.exports.apps = app
