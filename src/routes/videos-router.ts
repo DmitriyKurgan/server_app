@@ -117,7 +117,6 @@ videosRouter.put('/:id', validateRequest, (req: Request, res: Response) => {
         res.sendStatus(404);
         return;
     }
-
     const currentDate = new Date();
     const modifiedDate = new Date(currentDate);
     modifiedDate.setDate(currentDate.getDate() + 6);
