@@ -86,6 +86,7 @@ videosRouter.delete('/:id', (req: Request, res: Response) => {
         videos.splice(indexToDelete, 1);
         return res.sendStatus(204);
     }
+
     return res.sendStatus(404);
 });
 
