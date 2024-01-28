@@ -65,14 +65,12 @@ exports.videosRouter.get('/:id', (req, res) => {
 });
 exports.videosRouter.delete('/:id', (req, res) => {
     const id = +req.params.id;
-    for (let i = 0; i < exports.videos.length; i++) {
-        if (exports.videos[i].id === id) {
-            exports.videos.splice(i, 1);
-            res.sendStatus(204);
-        }
-        return false;
+    const indexToDelete = exports.videos.findIndex(video => video.id === id);
+    if (indexToDelete !== -1) {
+        exports.videos.splice(indexToDelete, 1);
+        return res.sendStatus(204);
     }
-    res.sendStatus(404);
+    return res.sendStatus(404);
 });
 exports.videosRouter.post("/", middlewares_1.validateRequest, (req, res) => {
     var _a, _b;
