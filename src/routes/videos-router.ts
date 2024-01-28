@@ -101,8 +101,8 @@ videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
         author: req.body.author,
         canBeDownloaded: Boolean(req.body.canBeDownloaded),
         minAgeRestriction: req.body.minAgeRestriction ?? null,
-        createdAt: formattedDate,
-        publicationDate: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
+        publicationDate: formattedDate,
         availableResolutions: req.body.availableResolutions ?? ["P146"],
     };
 
@@ -118,17 +118,20 @@ videosRouter.put('/:id', validateRequest, (req: Request, res: Response) => {
         return;
     }
 
+    const currentDate = new Date();
+    const modifiedDate = new Date(currentDate);
+    modifiedDate.setDate(currentDate.getDate() + 6);
+
     videoById.title = req.body.title ?? videoById.title;
     videoById.author = req.body.author ?? videoById.author;
     videoById.availableResolutions = req.body.availableResolutions ?? videoById.availableResolutions;
     videoById.canBeDownloaded = req.body.canBeDownloaded ?? videoById.canBeDownloaded;
     videoById.minAgeRestriction = req.body.minAgeRestriction ?? videoById.minAgeRestriction;
 
-    videoById.publicationDate = new Date().toISOString();
+    videoById.publicationDate = modifiedDate.toISOString();
 
     res.status(204).send(videoById);
 });
-
 
 
 
