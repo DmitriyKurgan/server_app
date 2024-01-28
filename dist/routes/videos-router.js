@@ -11,7 +11,7 @@ var CodeResponsesEnum;
     CodeResponsesEnum[CodeResponsesEnum["Not_found_404"] = 404] = "Not_found_404";
     CodeResponsesEnum[CodeResponsesEnum["Not_content_204"] = 204] = "Not_content_204";
     CodeResponsesEnum[CodeResponsesEnum["Created_201"] = 201] = "Created_201";
-})(CodeResponsesEnum = exports.CodeResponsesEnum || (exports.CodeResponsesEnum = {}));
+})(CodeResponsesEnum || (exports.CodeResponsesEnum = CodeResponsesEnum = {}));
 //const videos = [
 // {
 //     id: 0,
