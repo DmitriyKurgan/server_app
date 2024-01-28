@@ -84,6 +84,7 @@ videosRouter.delete('/:id', (req:Request, res:Response)=>{
         if (videos[i].id === id){
             videos.splice(i,1)
             res.sendStatus(204)
+            return false
         }
         return false
     }
