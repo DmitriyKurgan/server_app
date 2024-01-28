@@ -120,7 +120,7 @@ videosRouter.put('/:id', validateRequest, (req: Request, res: Response) => {
     const currentDate = new Date();
     const modifiedDate = new Date(currentDate);
     modifiedDate.setDate(currentDate.getDate() + 6);
-    videoById.publicationDate = modifiedDate.toISOString();
+    videoById.publicationDate = req.body.publicationDate
     videoById.title = req.body.title ?? videoById.title;
     videoById.author = req.body.author ?? videoById.author;
     videoById.availableResolutions = req.body.availableResolutions ?? videoById.availableResolutions;

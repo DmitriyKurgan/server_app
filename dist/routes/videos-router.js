@@ -103,7 +103,7 @@ exports.videosRouter.put('/:id', middlewares_1.validateRequest, (req, res) => {
     const currentDate = new Date();
     const modifiedDate = new Date(currentDate);
     modifiedDate.setDate(currentDate.getDate() + 6);
-    videoById.publicationDate = modifiedDate.toISOString();
+    videoById.publicationDate = req.body.publicationDate;
     videoById.title = (_a = req.body.title) !== null && _a !== void 0 ? _a : videoById.title;
     videoById.author = (_b = req.body.author) !== null && _b !== void 0 ? _b : videoById.author;
     videoById.availableResolutions = (_c = req.body.availableResolutions) !== null && _c !== void 0 ? _c : videoById.availableResolutions;
