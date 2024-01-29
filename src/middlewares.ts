@@ -23,7 +23,12 @@ export const validateRequest = [
 
         return true;
     }).withMessage('Invalid availableResolutions value'),
-    body('publicationDate').optional().isISO8601().withMessage('Invalid publicationDate value'),
+    body('publicationDate').optional().isISO8601().custom((value:string) => {
+        if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(value)) {
+            throw new Error('Invalid publicationDate format');
+        }
+        return true;
+    }),
     (req: Request, res: Response, next: NextFunction) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

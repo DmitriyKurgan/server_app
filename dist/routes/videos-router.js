@@ -58,7 +58,7 @@ exports.videosRouter.get('/', (req, res) => {
 exports.videosRouter.get('/:id', (req, res) => {
     const id = +req.params.id;
     const videoById = exports.videos.find(v => v.id === id);
-    if (!id && !videoById) {
+    if (!videoById) {
         res.sendStatus(404);
     }
     res.status(200).send(videoById);

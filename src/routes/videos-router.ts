@@ -106,8 +106,6 @@ videosRouter.post("/", validateRequest, (req: Request, res: Response) => {
         publicationDate: formattedDate,
         availableResolutions: req.body.availableResolutions ?? ["P146"],
     };
-
-
     videos.push(newVideo);
     res.status(CodeResponsesEnum.Created_201).send(newVideo);
 });
